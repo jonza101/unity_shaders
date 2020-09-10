@@ -197,17 +197,15 @@
 				b = normalize(cross(v.normal, t));
 				float3x3 tbn = float3x3(t, b, float3(v.normal.xyz));
 				v.normal = float4(float3(normalize(mul(tbn, normal))).xyz, 1.0);
-				//return fixed4(v.normal.xyz, 1.0);
 
 				//	SHADING CALC
 				float4 light_dir = _WorldSpaceLightPos0;
-				float3 view_dir = normalize(_WorldSpaceCameraPos - v.world_v);
-				//float3 refl_dir = reflect(-light_dir, v.normal);
+				float3 view_dir = normalize(v.world_v - _WorldSpaceCameraPos);
+				float3 refl_dir = reflect(view_dir, v.normal);
 
 				float diff = max(0.0, dot(v.normal, light_dir));
 				float3 halfway_dir = normalize(light_dir + view_dir);
 				float spec = pow(max(0.0, dot(halfway_dir, v.normal)), _shininess);
-				//float spec = pow(max(0.0, dot(view_dir, refl_dir)), _shininess);
 
 				float2 t_uv = (v.uv + _Time * _txt_move * _txt_move_dir) % 1.0;
 
@@ -218,13 +216,11 @@
 				float3 l_color = (ambient + diffuse + specular) * _LightColor0;
 
 				//	FRESNEL
-				float fresnel = max(0.0, dot(view_dir, float3(0.0, 1.0, 0.0)));
+				float fresnel = max(0.0, dot(refl_dir, v.normal));
+				//return float4(fresnel, fresnel, fresnel, 1.0);
 
 				float4 color = float4(lerp(b_color, l_color, depth_factor).xyz, 1.0);
-				color = float4(lerp(color, r_color, fresnel * _refl).xyz, _transparency * depth_factor);
-
-				//	APPLY COLOR
-				fixed4 col = fixed4(lerp(b_color, l_color, depth_factor), _transparency * 1);
+				color = float4(lerp(color, r_color, fresnel * _refl).xyz, _transparency * 1);
 
 				return color;
             }

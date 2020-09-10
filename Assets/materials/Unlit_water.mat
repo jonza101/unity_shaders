@@ -92,25 +92,25 @@ Material:
     - _constant: 1
     - _depth_factor: 3
     - _distor_move: 0.03
-    - _distor_s: 0.025
+    - _distor_s: 0.04
     - _fog_density: 0
     - _linear: 1
-    - _max_depth: 3.5
+    - _max_depth: 5
     - _max_dist: 20
-    - _max_wave_ripple: 0.5
-    - _min_wave_ripple: -0.5
+    - _max_wave_ripple: 1
+    - _min_wave_ripple: -1
     - _move_factor: 0
     - _normal_move: 0
     - _period: 0.175
     - _quadratic: 1
     - _qwe: 0
-    - _refl: 0.6
+    - _refl: 0.15
     - _shininess: 512
     - _transparency: 1
     - _txt_move: 0
-    - _wave_amplitude: 0.03
-    - _wave_len: 0.75
-    - _wave_ripple_amplitude: 0.025
+    - _wave_amplitude: 0.05
+    - _wave_len: 0.5
+    - _wave_ripple_amplitude: 0.03
     - _wave_ripple_speed: 50
     - _wave_speed: 100
     m_Colors:
