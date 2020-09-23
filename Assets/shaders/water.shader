@@ -200,8 +200,7 @@
 
 				//	SHADING CALC
 				float4 light_dir = _WorldSpaceLightPos0;
-				float3 view_dir = normalize(v.world_v - _WorldSpaceCameraPos);
-				float3 refl_dir = reflect(view_dir, v.normal);
+				float3 view_dir = normalize(_WorldSpaceCameraPos - v.world_v);
 
 				float diff = max(0.0, dot(v.normal, light_dir));
 				float3 halfway_dir = normalize(light_dir + view_dir);
@@ -216,7 +215,7 @@
 				float3 l_color = (ambient + diffuse + specular) * _LightColor0;
 
 				//	FRESNEL
-				float fresnel = max(0.0, dot(refl_dir, v.normal));
+				float fresnel =	1.0 - max(0.0, dot(view_dir, v.normal));
 				//return float4(fresnel, fresnel, fresnel, 1.0);
 
 				float4 color = float4(lerp(b_color, l_color, depth_factor).xyz, 1.0);

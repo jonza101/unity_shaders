@@ -104,7 +104,7 @@ Material:
     - _period: 0.175
     - _quadratic: 1
     - _qwe: 0
-    - _refl: 0.15
+    - _refl: 0.25
     - _shininess: 512
     - _transparency: 1
     - _txt_move: 0

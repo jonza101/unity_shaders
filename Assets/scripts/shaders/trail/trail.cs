@@ -37,6 +37,6 @@ public class trail : MonoBehaviour
 		float curr_time = Time.time;
 		this.speed = Vector3.Distance(this.old_pos, this.transform.position) / (curr_time - this.elapsed_time);
 		this.elapsed_time = curr_time;
-		this.old_pos = Vector3.Lerp(this.old_pos, this.transform.position, this.pos_lerp_factor);
+		this.old_pos = Vector3.Slerp(this.old_pos, this.transform.position, this.pos_lerp_factor);
 	}
 }
